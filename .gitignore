@@ -1,0 +1,20 @@
+# Python cache files
+__pycache__/
+*.py[cod]
+*.class
+
+# Environment files
+.env
+.venv
+env/
+venv/
+ENV/
+
+# Generated images
+book_illustrations/
+
+# JSON data files
+prompts.json
+
+# Logs
+*.log
