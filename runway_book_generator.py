@@ -2,51 +2,50 @@ import requests
 import json
 import os
 import time
+from openai import OpenAI
 from dotenv import load_dotenv
 
 # Load environment variables from .env file
 load_dotenv()
 
 # Get API key from environment variable
-API_KEY = os.getenv("RUNWAY_API_KEY")
-
-# RunwayML API endpoints
-RUNWAY_API_URL = "https://api.runwayml.com/v1/inference"
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 
 
-def generate_book_illustration(prompt, page_number, style="dreamshaper"):
+def generate_book_illustration(
+    prompt, page_number, style="children's book illustration"
+):
     """
-    Generate an illustration using RunwayML API
+    Generate an illustration using OpenAI's DALL-E API
 
     Args:
         prompt (str): The description of the image to generate
         page_number (int or str): The page number for file naming
-        style (str): Model style to use (default: dreamshaper)
+        style (str): Style descriptor to include in the prompt
 
     Returns:
         str: Path to the downloaded image
     """
-    headers = {"Authorization": f"Bearer {API_KEY}", "Content-Type": "application/json"}
+    if not OPENAI_API_KEY:
+        print("Error: OPENAI_API_KEY not found in .env file")
+        return None
 
-    payload = {
-        "prompt": prompt,
-        "model": style,
-        "negative_prompt": "deformed, ugly, disfigured, poor anatomy, bad proportions, distorted face",
-        "num_outputs": 1,
-        "width": 768,
-        "height": 768,
-        "steps": 30,
-        "guidance_scale": 7.5,
-    }
+    # Format the prompt with the style
+    formatted_prompt = f"{style}: {prompt}"
 
     print(f"Generating image for page {page_number}...")
 
     try:
-        response = requests.post(RUNWAY_API_URL, headers=headers, json=payload)
-        response.raise_for_status()
+        # Create OpenAI client
+        client = OpenAI(api_key=OPENAI_API_KEY)
 
-        result = response.json()
-        image_url = result["output"][0]
+        # Call OpenAI's DALL-E API to generate the image
+        response = client.images.generate(
+            model="dall-e-3", prompt=formatted_prompt, n=1, size="1024x1024"
+        )
+
+        # Get the image URL from the response
+        image_url = response.data[0].url
 
         # Download the image
         image_response = requests.get(image_url)
@@ -68,7 +67,7 @@ def generate_book_illustration(prompt, page_number, style="dreamshaper"):
         print(f"Image saved to {output_path}")
         return output_path
 
-    except requests.exceptions.RequestException as e:
+    except Exception as e:
         print(f"Error generating image: {e}")
         return None
 
@@ -287,9 +286,10 @@ def interactive_menu():
 # Main execution
 if __name__ == "__main__":
     # Check if API key is set
-    if not API_KEY:
-        print("Error: RUNWAY_API_KEY not found in .env file")
-        print("Please create a .env file with your RunwayML API key")
+    if not OPENAI_API_KEY:
+        print("Error: OPENAI_API_KEY not found in .env file")
+        print("Please create a .env file with your OpenAI API key")
+        print("You can get an API key at https://platform.openai.com/account/api-keys")
         exit(1)
 
     # Run the interactive menu
