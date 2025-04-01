@@ -5,6 +5,30 @@
 - **Date Started**: [DATE]
 - **Client Name**: [CLIENT NAME]
 
+# Custom Children's Book Project Tracking
+
+---
+
+title: "Book Creation Tracking Template"
+version: 1.0
+purpose: "Template for tracking children's book creation progress"
+related_files:
+
+- "/prompts/story-generation/custom_childrens_book_agent_prompt.md" - Main agent prompt
+- "/kaleas-book-prototype/character-description.md" - Example character descriptions
+- "/kaleas-book-prototype/kaleas-book-content.md" - Example story content
+- "/kaleas-book-prototype/daughters_custom_book_project.md" - Example completed project
+  last_updated: "2023-03-24"
+
+---
+
+<!-- START: TRACKING TEMPLATE -->
+
+## Project Information
+
+- **Date Started**: [DATE]
+- **Client Name**: [CLIENT NAME]
+
 ## 1. Client Brief
 
 ### Child Information

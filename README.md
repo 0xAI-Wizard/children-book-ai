@@ -1,70 +1,76 @@
-# Kalea's Book Illustration Generator
+# Children's Book Creator System - Master Index
 
-This tool automatically generates illustrations for Kalea's custom children's book using RunwayML's AI image generation API with the Dreamshaper model.
+---
 
-## Setup Instructions
+title: "Children's Book Creator System - File Index and Relationship Map"
+version: 1.0
+purpose: "Master index for navigating all related prompts, examples, and templates"
+last_updated: "2023-03-24"
 
-1. **Install Python Requirements**:
+---
 
-   ```bash
-   pip install -r requirements.txt
-   ```
+## Overview
 
-2. **Configure API Key**:
+This repository contains a complete system for AI-assisted children's book creation, including:
 
-   - Edit the `.env` file and replace `your_api_key_here` with your actual RunwayML API key
-   - Your API key can be found in your RunwayML account settings under "API Keys"
+- Process guidance prompts
+- Character description templates
+- Illustration prompts
+- Story creation workflows
+- Example projects
 
-3. **Prepare Markdown File**:
-   - Make sure your book project file (`daughters_custom_book_project.md`) is in the same directory
-   - The tool will automatically extract illustration descriptions from the "Illustration Specifications" section
+## File Structure and Relationships
 
-## Usage
+### 1. Main Process Prompt
 
-Run the script with the following command:
+- `/prompts/story-generation/custom_childrens_book_agent_prompt.md` - The main AI agent process prompt
 
-```bash
-python runway_book_generator.py
+### 2. Illustration Guidance
+
+- `/prompts/illustrations/illustration-generation.md` - How to generate consistent illustrations
+- `/prompts/illustrations/illustration-description-generation.md` - How to create detailed illustration descriptions
+
+### 3. Template Files
+
+- `/kaleas-book-prototype/book_creation_tracking_template.md` - Tracking template for book projects
+
+### 4. Example Content
+
+- `/kaleas-book-prototype/character-description.md` - Example character descriptions
+- `/kaleas-book-prototype/kaleas-book-content.md` - Example story content with illustrations
+- `/kaleas-book-prototype/daughters_custom_book_project.md` - Example of a completed project
+- `/samples/sample_conversation_demonstration.md` - Example agent-client conversation
+
+## Process Flow
+
+1. Begin with the main process prompt (`custom_childrens_book_agent_prompt.md`)
+2. Use the tracking template (`book_creation_tracking_template.md`) to document the project
+3. Create detailed character descriptions following the format in `character-description.md`
+4. Develop the story content with illustration descriptions
+5. Use `illustration-description-generation.md` to create detailed illustration prompts
+6. Generate illustrations following `illustration-generation.md` guidance
+
+## Key File Relationships
+
+```
+custom_childrens_book_agent_prompt.md
+├── book_creation_tracking_template.md (output tracking)
+├── character-description.md (character description format)
+└── illustration guidance
+    ├── illustration-description-generation.md (creating detailed art prompts)
+    └── illustration-generation.md (generating consistent art)
 ```
 
-### Interactive Menu Options
+## Example Projects
 
-The tool provides an interactive menu with the following options:
+See the complete example "Kalea's Traveling Heart" in the `/kaleas-book-prototype/` directory, which demonstrates all aspects of the book creation process.
 
-1. **Generate All Illustrations**:
+## Reference Guides
 
-   - Processes all pages in the book project
-   - Shows you each prompt and asks for confirmation before generating
-   - Saves images to the "book_illustrations" folder
+When using this system, the AI should reference all relevant files for each stage of the process:
 
-2. **Generate a Single Illustration**:
-
-   - Generate just one specific page illustration
-   - Useful for re-doing a single page that needs adjustments
-
-3. **View Available Pages**:
-
-   - See a list of all pages that have illustration descriptions
-
-4. **Exit**:
-   - Quit the program
-
-## Output
-
-All generated illustrations will be saved to the "book_illustrations" folder with filenames:
-
-- `cover.png` for the book cover
-- `page_01.png`, `page_02.png`, etc. for each page
-
-## Important Notes
-
-- The default image resolution is 768x768 pixels
-- Each image generation consumes RunwayML credits
-- There's a short pause between API calls to avoid rate limiting
-- For best results, review the generated prompts before confirming generation
-- You can manually adjust prompt text in the code if needed
-
-## Troubleshooting
-
-- If you see an "API key not found" error, make sure your `.env` file is correctly configured
-- If you encounter API errors, check your RunwayML account to ensure you have available credits
+1. **Initial consultation** → Main prompt for client questions
+2. **Story concepts** → Example story concepts in sample conversations
+3. **Character descriptions** → Character description template
+4. **Illustration guidance** → Illustration guidance files
+5. **Project tracking** → Book creation tracking template
